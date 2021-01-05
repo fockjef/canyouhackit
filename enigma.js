@@ -1,4 +1,5 @@
 (function( challenge_id = "enigma" ){
+
 	const reflector = "UKW B",
 	      plugboard = "BV PK XZ IJ RA GD MQ UT WF",
 	      hint1 = [ 16, 18, 03 ],

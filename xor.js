@@ -22,4 +22,4 @@
 		tag.refs.answer.value = key;
 		tag.submitAnswer();
 	}
-}
+})();
