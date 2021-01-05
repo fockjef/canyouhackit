@@ -10,7 +10,7 @@
 			for( let j = 0; j < alphanum.length; j++ ){
 				// CodeBreaker_submit never resolves on correct code ( solution still works but would hang at this point )
 				// let s = await CodeBreaker_submit( code + alphanum[j] );
-				let s = await HackerChallenge.submitAnswer( tag.challenge.meta.challenge_id, code + alphanum[j] ).fail( data => data.responseJSON ).then( data => data.hc_challenge.score );
+				let s = await HackerChallenge.submitAnswer( challenge_id, code + alphanum[j] ).catch( data => data.responseJSON ).then( data => data.hc_challenge.score );
 				if( s > score ){
 					score = s;
 					code += alphanum[j];

@@ -16,7 +16,7 @@
 			}
 		}
 		let msg = String.fromCharCode( ...cipher.map( ( c, i ) => c ^ key[i%key.length] ) );
-		key = String.fromChar( ...key );
+		key = String.fromCharCode( ...key );
 		console.info( key );
 		console.info( msg );
 		tag.refs.answer.value = key;

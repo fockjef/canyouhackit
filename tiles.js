@@ -6,8 +6,9 @@
 
 	runSolution( { challenge_id, solution } );
 
-	function solution( tag ){
-		let board = tag.challenge.game_board.map( row => row.slice() ),
+	async function solution( tag ){
+
+		let board = await HackerChallenge.submitAnswer( challenge_id, "NEW PUZZLE PLZ!" ).catch( data => data.responseJSON.hc_challenge.game_board ),
 		    numRows = board.length,
 		    numCols = board[0].length,
 		    moves = "";
@@ -53,7 +54,8 @@
 		console.info( `${moves.length} moves` );
 		moves = moves.split( "" ).join( "," );
 		console.info( moves );
-		Tiles_submit( moves );
+		tag.refs.answer.value = moves;
+		tag.submitAnswer();
 	}
 
 	function doMoves( board, moves ){
