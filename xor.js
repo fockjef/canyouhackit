@@ -1,6 +1,6 @@
 (function( challenge_id = "xor" ){
 
-	let requires = [ "https://fockjef.net/canyouhackit/lib/wordlist.js" ];
+	let requires = [ "https://fockjef.net/canyouhackit/lib/score-text.js" ];
 
 	runSolution( { challenge_id, solution } );
 
@@ -41,9 +41,5 @@
 
 	function decodeMsg( cipher, key ){
 		return String.fromCharCode( ...cipher.map( ( c, i ) => c ^ key[i%key.length] ) );
-	}
-
-	function scoreText( str ){
-		return str.split( /[^a-z]+/g ).filter( word => wordlist.has( word ) ).length;
 	}
 })();

@@ -2,7 +2,7 @@
 
 	let requires = [
 	    	"https://fockjef.net/canyouhackit/lib/enigma.js",
-	    	"https://fockjef.net/canyouhackit/lib/wordtree.js"
+	    	"https://fockjef.net/canyouhackit/lib/score-text.js"
 	    ];
 
 	runSolution( { challenge_id, requires, solution } );
@@ -52,14 +52,5 @@
 			perms = perms.filter( p => !hasDupes.test( p ) );
 		}
 		return perms.map( p => p.split( "" ).map( i => list[+i] ) );
-	}
-
-	function scoreText( str ){
-		let score = 0;
-		str = str.toLowerCase();
-		for( let i = 0; i < str.length - 4; i++ ){
-			score += +!!str.slice( i, i + 4 ).split( "" ).reduce( ( T, c ) => T && c in T ? T[c] : undefined, tree );
-		}
-		return score;
 	}
 })();
