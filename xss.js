@@ -10,5 +10,6 @@
 		console.log( flag );
 		tag.refs.image.value = image;
 		tag.refs.answer.value = flag;
+		tag.submitAnswer();
 	}
 })();
