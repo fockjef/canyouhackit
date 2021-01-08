@@ -1,13 +1,12 @@
 (function( challenge_id = "tiles" ){
 
+	runSolution( { challenge_id, solution } );
+
 	const MOVES = [ "UU", "UL", "UR", "DD", "DL", "DR", "LU", "LD", "LL", "RU", "RD", "RR" ],
 	      INC_ROW = { "U": -1, "D": 1, "L":  0, "R": 0 },
 	      INC_COL = { "U":  0, "D": 0, "L": -1, "R": 1 };
 
-	runSolution( { challenge_id, solution } );
-
 	async function solution( tag ){
-
 		let board = await HackerChallenge.submitAnswer( challenge_id, "NEW PUZZLE PLZ!" ).catch( data => data.responseJSON.hc_challenge.game_board ),
 		    numRows = board.length,
 		    numCols = board[0].length,
@@ -89,7 +88,7 @@
 		    	dist: calcDist( board, tile, goal, tileX ),
 		    	board, tile, goal, tileX
 		    } ];
-		let MAX_STACK_LOOP = 50;	// make sure we don't get stuck in a loop if something is wrong
+		let MAX_STACK_LOOP = 50;	// shouldn't be necessary but just in case...
 		while( stack.length && MAX_STACK_LOOP-- ){
 			let newStack = [],
 			    minDist = stack[0].dist;

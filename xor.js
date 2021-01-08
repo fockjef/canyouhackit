@@ -2,7 +2,7 @@
 
 	let requires = [ "https://fockjef.net/canyouhackit/lib/score-text.js" ];
 
-	runSolution( { challenge_id, solution } );
+	runSolution( { challenge_id, requires, solution } );
 
 	function solution( tag ){
 		let cipher = tag.challenge.cipher.match( /../g ).map( x => parseInt( x, 16 ) ),
