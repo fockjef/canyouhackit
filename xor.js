@@ -21,7 +21,7 @@
 				}
 			}
 		}
-		key = buildKeys( key ).map( k => [ k, scoreText( decodeMsg( cipher, k ) ) ] ).sort( ( a, b ) => b[1] - a[1] )[0][0];
+		key = buildKeys( key ).map( k => [ k, countWords( decodeMsg( cipher, k ) ) ] ).sort( ( a, b ) => b[1] - a[1] )[0][0];
 		let msg = String.fromCharCode( ...cipher.map( ( c, i ) => c ^ key[i%key.length] ) );
 		key = String.fromCharCode( ...key );
 		console.info( key );

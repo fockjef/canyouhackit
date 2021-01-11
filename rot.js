@@ -10,7 +10,7 @@
 		    bestScore = scoreText( msg );
 		for( let i = 1; i < 26; i++ ){
 			let msgRot = rotX( msg, i ),
-			    score = scoreText( msgRot );
+			    score = countWords( msgRot );
 			if( score > bestScore ){
 				bestScore = score;
 				bestGuess = msgRot;
