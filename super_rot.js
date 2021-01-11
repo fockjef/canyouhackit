@@ -1,6 +1,8 @@
 (function( challenge_id = "super_rot" ){
 
-	runSolution( { challenge_id, solution } );
+	let requires = [ "https://fockjef.net/canyouhackit/lib/score-text.js" ];
+
+	runSolution( { challenge_id, requires, solution } );
 
 	async function solution( tag ){
 		let prev_enc_msg = "";
@@ -13,7 +15,7 @@
 			    bestScore = 0,
 			    bestMsg = "";
 			for( let i = 0; i < 26; i++ ){
-				let msg = rotX( enc_msg, i );
+				let msg = rotX( enc_msg, i ),
 				    score = countWords( msg );
 				if( score > bestScore ){
 					bestScore = score;
