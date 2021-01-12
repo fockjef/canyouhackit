@@ -7,7 +7,7 @@
 	function solution( tag ){
 		let msg = tag.challenge.encrypted_message,
 		    bestGuess = msg,
-		    bestScore = scoreText( msg );
+		    bestScore = countWords( msg );
 		for( let i = 1; i < 26; i++ ){
 			let msgRot = rotX( msg, i ),
 			    score = countWords( msgRot );

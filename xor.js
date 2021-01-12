@@ -11,7 +11,7 @@
 			let temp = cipher.filter( ( _, j ) => j % key.length === i )
 			key[i] = [];
 			for( let byte = 32, bestByteScore = 0; byte < 127; byte++ ){
-				let score = String.fromCharCode( ...temp.map( x => x ^ byte ) ).replace( /[^a-z ]+/gi, "" ).length;
+				let score = String.fromCharCode( ...temp.map( x => x ^ byte ) ).replace( /[^a-z ,.']+/gi, "" ).length;
 				if( score > bestByteScore ){
 					bestByteScore = score;
 					key[i] = [ byte ];
