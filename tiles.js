@@ -7,7 +7,11 @@
 	      INC_COL = { "U":  0, "D": 0, "L": -1, "R": 1 };
 
 	async function solution( tag ){
-		let board = await HackerChallenge.submitAnswer( challenge_id, "NEW PUZZLE PLZ!" ).catch( data => data.responseJSON.hc_challenge.game_board ),
+
+		// wait for a second for game board to be updated
+		await sleep( 1000 );
+
+		let board = tag.challenge.game_board,
 		    numRows = board.length,
 		    numCols = board[0].length,
 		    moves = "";
@@ -150,5 +154,9 @@
 	function calcDist( board, tile, goal, tileX ){
 		let distBase = board.length + board[0].length - 1;
 		return ( Math.abs( tile.row - goal.row ) + Math.abs( tile.col - goal.col ) ) * distBase + ( Math.abs( tile.row - tileX.row ) + Math.abs( tile.col - tileX.col ) );
+	}
+
+	function sleep( ms ){
+		return new Promise( resolve => setTimeout( resolve, ms ) );
 	}
 })();
