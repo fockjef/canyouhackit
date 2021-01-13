@@ -16,7 +16,7 @@
 	4)	found the real function that prints the prompts (not sure exactly how it is passed execution but suspect
 		some sort of exception handler since Ctrl-C doesnt kill the process, so maybe it really is a trap :) )
 	5)	time to start twiddling some things around
-		managed to get the progrma to complain:
+		managed to get the program to complain:
 			"Are you trying to influence me? Your Jedi mind tricks are no good here."
 			"Hmm, that doesn't SEEM like an answer I'd give..."
 	BINGO!
@@ -27,6 +27,7 @@
 		the first number is just number of seconds since epoch from time()
 		the second is probably some sort of hash of the number which is probably a real pain to reverse
 		so instead just patch the unpacked binary by changing the bytes at locations 0x0036c4 and 0x38b9 to 0x85
+		[see debugme.sh]
 	*/
 
 	runSolution( { challenge_id, solution } );
@@ -34,7 +35,7 @@
 	function solution( tag ){
 		let flag = "flag{DebuggerXordinaire-????????-????????}";
 		console.info( flag );
-		console.info( "get a new flag from the binary" );
+		console.info( "run debugme.sh" );
 		tag.refs.answer.value = flag;
 		//tag.submitAnswer();
 	}
