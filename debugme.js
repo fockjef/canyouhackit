@@ -23,14 +23,19 @@
 	Wow! You must be psychic!
 	Here you go, but keep in mind that the flag is time-sensitive.
 	flag{DebuggerXordinaire-5FFF5782-E722796A}
+	6) So looks like those 2 hex numbers are time dependent as it clearly says
+		the first number is just number of seconds since epoch from time()
+		the second is probably some sort of hash of the number which is probably a real pain to reverse
+		so instead just patch the unpacked binary by changing the bytes at locations 0x0036c4 and 0x38b9 to 0x85
 	*/
 
 	runSolution( { challenge_id, solution } );
 
 	function solution( tag ){
-		let flag = "flag{DebuggerXordinaire-5FFF5782-E722796A}";
+		let flag = "flag{DebuggerXordinaire-????????-????????}";
 		console.info( flag );
+		console.info( "get a new flag from the binary" );
 		tag.refs.answer.value = flag;
-		tag.submitAnswer();
+		//tag.submitAnswer();
 	}
 })();
