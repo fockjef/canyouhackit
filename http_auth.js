@@ -7,7 +7,7 @@
             user, pass;
 
         if( downloadPCAP ){
-            let url = HackerChallenge.getBinaryLink( `${challenge_id}/http-auth.pcap` )[0].href,
+            let url = HackerChallenge.getBinaryLink( `${challenge_id}/http-auth.cap` )[0].href,
                 data = await fetch(url).then(res => res.text());
             user = data.match(/(?<=name=)[^&]+/)[0];
             pass = data.match(/(?<=pass=)[^&]+/)[0];
