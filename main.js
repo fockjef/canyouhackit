@@ -1,9 +1,9 @@
 (function(){
-	let challenges = {};
+	let challenges = window.challenges = {};
 
 	document.querySelectorAll( "challenge-card" ).forEach( card => {
 		let tag = card.getElementsByTagName( "challenge-modal" )[0]._tag,
-		    cid = tag.challenge.meta.challenge_id;
+			cid = tag.challenge.meta.challenge_id;
 		challenges[cid] = tag;
 		card.querySelector( "button.btn-lg" ).addEventListener( "click", () => {
 			if( !tag.challenge.solved ){

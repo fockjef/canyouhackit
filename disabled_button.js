@@ -3,7 +3,7 @@
 	runSolution( { challenge_id, solution } );
 
 	function solution( tag ){
-		tag.refs.submitButton.disabled = true;
+		tag.refs.submitButton.disabled = false;
 		tag.submit( {} );
 	}
 })();
