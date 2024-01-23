@@ -2,3 +2,4 @@
 !**.js
 !.gitignore
 !debugme.sh
+!secure_otp.py

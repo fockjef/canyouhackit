@@ -3,14 +3,16 @@
     runSolution( { challenge_id, solution } );
 
     async function solution( tag ){
-        window.solution_secure_otp = function(otp){
-            tag.refs.answer.value = otp;
-            tag.submit({});
-        }
         while( !/Time Remaining/.test(tag.refs.challengeContent.innerText) ){
             await sleep(100);
         }
-        document.head.appendChild(document.createElement("script")).src = "https://fockjef.net/canyouhackit/secure_otp.py?seed=" + tag.challenge.seed;
+        let seed = tag.challenge.seed,
+            callback = "secure_otp_" + seed;
+        window[callback] = function(otp){
+            tag.refs.answer.value = otp;
+            tag.submit({});
+        }
+        document.head.appendChild(document.createElement("script")).src = `https://fockjef.net/canyouhackit/secure_otp.py?callback=${callback}&seed=${seed}`;
     }
 
     function sleep( ms ){
