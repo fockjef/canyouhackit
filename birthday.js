@@ -1,4 +1,4 @@
-(function( challenge_id = "disabled_button" ){
+(function( challenge_id = "birthday" ){
 
     runSolution( { challenge_id, solution } );
 
