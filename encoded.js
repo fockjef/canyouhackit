@@ -1,16 +1,22 @@
 (function( challenge_id = "encoded" ){
 
-	let requires = [ "https://fockjef.net/canyouhackit/lib/bzip2.js" ];
+    let requires = [
+        "https://fockjef.net/canyouhackit/lib/bzip2.js",
+        "https://fockjef.net/canyouhackit/lib/zip.js"
+    ];
 
-	runSolution( { challenge_id, requires, solution } );
+    runSolution( { challenge_id, requires, solution } );
 
-	function solution( tag ){
-		let bin  = Uint8Array.from( atob( tag.challenge.encoded_flag ), chr => chr.charCodeAt() ),
-		    txt1 = String.fromCharCode( ...bzip2.decompress( bin ) ),
-		    txt2 = String.fromCharCode( ...txt1.match( /\b[01]+\b/g  ).map( bits => parseInt( bits,  2 ) ) ),
-		    flag = String.fromCharCode( ...txt2.match( /[\da-f]{2}/g ).map( byte => parseInt( byte, 16 ) ) );
-		console.info( flag );
-		tag.refs.answer.value = flag;
-		tag.submitAnswer();
-	}
+    function solution( tag ){
+        JSZip.loadAsync(new Uint8Array(tag.challenge.encoded_flag.match(/../g).map(x => parseInt(x, 16))).buffer).then(async data => {
+            let flag = await data.file("flag.txt").async("string"),
+                bin =  Uint8Array.from(atob(flag), chr => chr.charCodeAt());
+            flag = String.fromCharCode(...bzip2.decompress(bin));
+            flag = String.fromCharCode(...flag.match(/[01]+/g).map(x => parseInt(x, 2)));
+            flag = String.fromCharCode(...flag.match(/../g).map(x => parseInt(x, 16)));
+            console.info( flag );
+            tag.refs.answer.value = flag;
+            tag.submitAnswer();
+        });
+    }
 })();
