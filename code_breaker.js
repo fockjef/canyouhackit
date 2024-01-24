@@ -15,7 +15,7 @@
 					score = s;
 					code += alphanum[j];
 					tag.refs.answer.value = code;
-					j = Infinity;
+					break;
 				}
 			}
 		}

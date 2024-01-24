@@ -1,23 +1,17 @@
 (function( challenge_id = "base64_enc" ){
 
-	let requires = [ "https://fockjef.net/canyouhackit/lib/zip.js" ];
+    let requires = [ "https://fockjef.net/canyouhackit/lib/zip.js" ];
 
-	runSolution( { challenge_id, requires, solution } );
+    runSolution( { challenge_id, requires, solution } );
 
-	function solution( tag ){
-		zip.useWebWorkers = false;
-		zip.createReader( new zip.Data64URIReader( tag.challenge.b64_blob ), reader =>
-			reader.getEntries( files =>
-				files.filter( f => f.filename === "flag.txt" )[0].getData( new zip.TextWriter(), flag => {
-					flag = flag.match( /[\da-f]{2}/g ).map( ( byte, i ) => parseInt( byte, 16 ) );
-					files.filter( f => f.filename === "xor_key.txt" )[0].getData( new zip.TextWriter(), key => {
-						flag = String.fromCharCode( ...flag.map( ( f, i ) => f ^ key.charCodeAt( i ) ) );
-						console.info( flag );
-						tag.refs.answer.value = flag;
-						tag.submitAnswer();
-					} );
-				} )
-			)
-		)
-	}
+    function solution( tag ){
+        JSZip.loadAsync(tag.challenge.b64_blob, {base64: true}).then(async data => {
+            let flag = await data.file("flag.txt").async("string"),
+                xor_key = await data.file("xor_key.txt").async("string");
+            flag = String.fromCharCode(...flag.match(/../g).map((x, i) => parseInt(x, 16) ^ xor_key.charCodeAt(i)));
+            console.info( flag );
+            tag.refs.answer.value = flag;
+            tag.submitAnswer();
+        })
+    }
 })();

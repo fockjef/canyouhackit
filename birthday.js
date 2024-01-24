@@ -9,6 +9,7 @@
                     let date = `${m.toString().padStart(2, "0")}/${d.toString().padStart(2, "0")}/${y}`;
                     if( sha256(date) == tag.challenge.date_hash ){
                         Birthday_get_today = () => date;
+                        console.info( date );
                         tag.submit({});
                         return;
                     }

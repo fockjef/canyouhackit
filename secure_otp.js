@@ -9,6 +9,7 @@
         let seed = tag.challenge.seed,
             callback = "secure_otp_" + seed;
         window[callback] = function(otp){
+            console.info( otp );
             tag.refs.answer.value = otp;
             tag.submit({});
         }

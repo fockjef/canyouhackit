@@ -46,11 +46,15 @@
 		return prefix + String.fromCharCode( ...preimage.reverse() );
 	}
 
+	// for a valid license_key we need to find a 4 character preimage that is a valid hex number
+	// probability that all 4 characters are hex digits is (22/256) ^ 4
+	// probability that we find a valid key after n iterations is 1-(1-(22/256)^4)^n
+	// number of iterations to guarantee we find a key is ln(epsilon)/ln(1-(1-(22/256)^4)) ~= 660,825
 	function generate_license_key( seed = 0xc67d853b, iv = 0, hash = 0x984d83e0 ){
 		let hex = /^[\da-f]+$/i,
 			prefix = Math.floor( Math.random() * Math.pow( 2, 48 ) ).toString( 16 ),
 			table = generate_table( seed );
-		for( let i = 0; i < 1e6; i++ ){
+		for( let i = 0; i < 660825; i++ ){
 			let h = find_preimage( table, iv, hash, ( prefix + i.toString( 16 ) ).slice( -12 ) );
 			if( hex.test( h ) ) return h;
 		}

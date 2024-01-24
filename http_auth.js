@@ -3,7 +3,7 @@
     runSolution( { challenge_id, solution } );
 
     async function solution( tag ){
-        let downloadPCAP = true,
+        let downloadPCAP = false,
             user, pass;
 
         if( downloadPCAP ){
