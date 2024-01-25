@@ -37,7 +37,7 @@
 
         console.info( password );
         tag.refs.answer.value = password;
-        tag.submit({});
+        tag.submitAnswer();
     }
 
     function readStr( offset, base, bin ){

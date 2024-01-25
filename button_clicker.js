@@ -1,10 +1,13 @@
 (function( challenge_id = "button_clicker" ){
 
-	runSolution( { challenge_id, solution } );
+    runSolution( { challenge_id, solution } );
 
-	function solution( tag ){
-		ButtonClicker_num_clicks = 1e6;
-		ButtonClicker_click_button({originalEvent:{isTrusted: true}, type: "click"});
-		tag.submit( {} );
-	}
+    async function solution( tag ){
+        while( ButtonClicker_timerId == -1 ){
+            await sleep(100);
+        }
+        ButtonClicker_num_clicks = 1e6;
+        ButtonClicker_click_button({originalEvent:{isTrusted: true}, type: "click"});
+        tag.submitAnswer();
+    }
 })();

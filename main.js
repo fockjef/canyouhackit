@@ -44,4 +44,8 @@
 		solution( challenges[challenge_id] );
 		console.groupEnd( challenge_id );
 	};
+
+	window.sleep = function( ms ){
+		return new Promise( resolve => setTimeout( resolve, ms ) );
+	}
 })();

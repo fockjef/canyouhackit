@@ -7,10 +7,6 @@
 			await sleep(100);
 		}
 		tag.refs.submitButton.disabled = false;
-		tag.submit( {} );
-	}
-
-	function sleep( ms ){
-		return new Promise( resolve => setTimeout( resolve, ms ) );
+		tag.submitAnswer();
 	}
 })();

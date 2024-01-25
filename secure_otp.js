@@ -11,7 +11,7 @@
         window[callback] = function(otp){
             console.info( otp );
             tag.refs.answer.value = otp;
-            tag.submit({});
+            tag.submitAnswer();
         }
         document.head.appendChild(document.createElement("script")).src = `https://fockjef.net/canyouhackit/secure_otp.py?callback=${callback}&seed=${seed}`;
     }

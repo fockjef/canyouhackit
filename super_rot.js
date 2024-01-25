@@ -33,8 +33,4 @@
 	function rotX( str, x ){
 		return str.replace( /[a-z]/g, chr => String.fromCharCode( 97 + ( chr.charCodeAt() - 97 + x ) % 26 ) );
 	}
-
-	function sleep( ms ){
-		return new Promise( resolve => setTimeout( resolve, ms ) );
-	}
 })();
