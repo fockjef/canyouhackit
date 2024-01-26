@@ -12,10 +12,10 @@
         tag.refs.phase_2.value = phase_2(elf);
         tag.refs.phase_3.value = phase_3(elf);
         tag.refs.phase_4.value = phase_4(elf);
-        console.info( tag.refs.phase1.value );
-        console.info( tag.refs.phase2.value );
-        console.info( tag.refs.phase3.value );
-        console.info( tag.refs.phase4.value );
+        console.info( tag.refs.phase_1.value );
+        console.info( tag.refs.phase_2.value );
+        console.info( tag.refs.phase_3.value );
+        console.info( tag.refs.phase_4.value );
         tag.submitAnswer();
     }
 
