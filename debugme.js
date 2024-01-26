@@ -33,10 +33,12 @@
     runSolution( { challenge_id, solution } );
 
     function solution( tag ){
-        let flag = `flag{DebuggerXordinaire-${Math.floor(Date.now()/1000).toString(16)}-????????}`;
-        console.info( flag );
-        console.info( "run debugme.sh" );
-        tag.refs.answer.value = flag;
-        //tag.submitAnswer();
+        let callback = "debugme_" + Date.now();
+        window[callback] = function(flag){
+            console.info( flag );
+            tag.refs.answer.value = flag;
+            tag.submitAnswer();
+        }
+        document.head.appendChild(document.createElement("script")).src = `https://fockjef.net/canyouhackit/debugme.pl?callback=${callback}`;
     }
 })();

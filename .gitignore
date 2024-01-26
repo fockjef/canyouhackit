@@ -2,5 +2,6 @@
 !**.js
 !.gitignore
 !debugme.sh
+!debugme.pl
 !secure_otp.py
 !lib
