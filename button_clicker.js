@@ -3,9 +3,6 @@
     runSolution( { challenge_id, solution } );
 
     async function solution( tag ){
-        while( ButtonClicker_timerId == -1 ){
-            await sleep(100);
-        }
         ButtonClicker_num_clicks = 1e6;
         ButtonClicker_click_button({originalEvent:{isTrusted: true}, type: "click"});
         tag.submitAnswer();

@@ -6,47 +6,17 @@
 
 (function( challenge_id = "babysfirst" ){
 
-    runSolution( { challenge_id, solution } );
+    let requires = [ "https://fockjef.net/canyouhackit/lib/elf.js" ];
+
+    runSolution( { challenge_id, requires, solution } );
 
     async function solution( tag ){
         let url = tag.refs.challengeContent.querySelector("a").href,
-            bin = new DataView( await fetch( url ).then( res => res.arrayBuffer() ) ),
-            phoff = bin.getUint32( 0x20, true ),
-            vaddr = bin.getUint32( phoff + 0x10, true ),
-            shoff = bin.getUint32( 0x28, true ),
-            shentsize = bin.getUint16( 0x3a, true ),
-            shnum = bin.getUint16( 0x3c, true ),
-            shstrndx = bin.getUint16( 0x3e, true ),
-            shstrtaboff = bin.getUint32( shoff + shentsize * shstrndx + 0x18, true ),
-            shstrtabsize = bin.getUint32( shoff + shentsize * shstrndx + 0x20, true );
-
-        // read sections from section header
-        let sections = new Array( shnum );
-        for( let i = 0, pos = shoff; i < shnum; i++, pos += shentsize ){
-            sections[i] = {
-                name: readStr( bin.getUint32( pos, true ), shstrtaboff, bin ),
-                offset: bin.getUint32( pos + 0x18, true ),
-                size: bin.getUint32( pos + 0x20, true ),
-                entsize: bin.getUint32( pos + 0x38, true )
-            }
-        }
-
-        // get password from topsykrett data section
-        let topsykretts = sections.filter( s => s.name === ".topsykretts" )[0],
-            password = readStr(0, topsykretts.offset, bin);
-
+            file = await fetch(url).then(res => res.arrayBuffer()),
+            elf = new ELF(file),
+            password = elf.readString(elf.section(".topsykretts")[0].offset);
         console.info( password );
         tag.refs.answer.value = password;
         tag.submitAnswer();
-    }
-
-    function readStr( offset, base, bin ){
-        let name = "",
-            pos = base + offset;
-        while( bin.getInt8( pos ) ){
-            name += String.fromCharCode( bin.getInt8( pos ) );
-            pos++;
-        }
-        return name;
     }
 })();

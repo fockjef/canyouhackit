@@ -15,8 +15,4 @@
         }
         document.head.appendChild(document.createElement("script")).src = `https://fockjef.net/canyouhackit/secure_otp.py?callback=${callback}&seed=${seed}`;
     }
-
-    function sleep( ms ){
-        return new Promise( resolve => setTimeout( resolve, ms ) );
-    }
 })();
