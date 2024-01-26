@@ -3,3 +3,4 @@
 !.gitignore
 !debugme.sh
 !secure_otp.py
+!lib
