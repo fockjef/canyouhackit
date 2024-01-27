@@ -5,9 +5,9 @@
     runSolution( { challenge_id, requires, solution } );
 
     function solution( tag ){
-        JSZip.loadAsync(tag.challenge.b64_blob, {base64: true}).then(async data => {
-            let flag = await data.file("flag.txt").async("string"),
-                xor_key = await data.file("xor_key.txt").async("string");
+        JSZip.loadAsync(tag.challenge.b64_blob, {base64: true}).then(async zip => {
+            let flag = await zip.file("flag.txt").async("string"),
+                xor_key = await zip.file("xor_key.txt").async("string");
             flag = String.fromCharCode(...flag.match(/../g).map((x, i) => parseInt(x, 16) ^ xor_key.charCodeAt(i)));
             console.info( flag );
             tag.refs.answer.value = flag;
