@@ -16,7 +16,7 @@
             let flag = await zip.file("flag.txt").async("uint8array");
             flag = String.fromCharCode(...bzip2.decompress(flag));
             console.info(flag);
-            tag.refs.answer = flag;
+            tag.refs.answer.value = flag;
             tag.submitAnswer();
         })
     }
